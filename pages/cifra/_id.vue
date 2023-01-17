@@ -21,7 +21,7 @@
       <div class="card card-style mb-3 p-0">
         <div class="content">
           <span
-            v-for="(ord, key) in ordem" :key="key"
+            v-for="(ord, key) in ordem" :key="`ordem_${key}`"
             :style="`
               margin-left: 6px;
               border: 2px solid black;
