@@ -21,20 +21,24 @@
           </div>
 
           <div class="list-group list-custom-small icon-0">
-            <a
+            <nuxt-link
               v-for="(item, key) in lista" :key="key"
-              :href="`/playlist/${item.id}`"
-              @click.right="removerPlaylist(item.id)"
-            >
-              <i class="fa fa-sign-in-alt color-red-dark"></i>
-              <span>{{ item.titulo }} - <small>{{ item.data_playlist }}</small></span>
-              <i class="fa fa-angle-right"></i>
-            </a>
+              :to="`/playlist/${item.id}`">
+              <a
+                href="#"
+                @click.right="removerPlaylist(item.id)"
+              >
+                <i class="fa fa-sign-in-alt color-red-dark"></i>
+                <span>{{ item.titulo }} - <small>{{ item.data_playlist }}</small></span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </nuxt-link>
           </div>
         </div>
       </div>
-      <PlaylistForm />
     </div>
+
+    <PlaylistForm />
   </div>
 </template>
 <script>

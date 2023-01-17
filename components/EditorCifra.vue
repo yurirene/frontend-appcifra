@@ -1,5 +1,18 @@
 <template>
-  <editor-content :editor="editor" />
+  <div>
+    <button
+      class="btn btn-xxs text-white bg-dark rounded-m "
+      @click="editor.chain().focus().setHardBreak().run()">
+      Quebrar Linha
+    </button>
+    <button
+      class="btn btn-xxs text-white bg-dark rounded-m "
+      @click="editor.chain().focus().toggleBold().run()"
+    >
+      Negrito
+    </button>
+    <editor-content :editor="editor" class="mt-3" />
+  </div>
 </template>
 
 <script>
@@ -51,4 +64,3 @@ export default {
   },
 }
 </script>
-#

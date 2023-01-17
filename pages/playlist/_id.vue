@@ -27,15 +27,18 @@
           <h3>Músicas</h3>
           <div class="clearfix mb-3"></div>
           <div class="list-group list-custom-small icon-0">
-            <a
+            <nuxt-link
               v-for="(item, key) in lista" :key="key"
-              :href="'/cifra/' + item.id"
-              @click.right="removerMusica(item.id)"
-            >
-              <i class="fa fa-music color-red-dark"></i>
-              <span>{{ item.titulo }} - <em>{{ item.artista }}</em></span>
-              <i class="fa fa-angle-right"></i>
-            </a>
+              :to="`/cifra/${item.id}`">
+              <a
+                href="#"
+                @click.right="removerMusica(item.id)"
+                >
+                <i class="fa fa-music color-red-dark"></i>
+                <span>{{ item.titulo }} - <em>{{ item.artista }}</em></span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </nuxt-link>
           </div>
         </div>
       </div>

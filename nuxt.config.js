@@ -48,7 +48,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'http://cifra.meuapp.net.br/api',
+    // baseURL: 'http://cifra.meuapp.net.br/api',
+    baseURL: 'http://cifra.test/api',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -56,8 +57,8 @@ export default {
     icon: false,
     manifest: {
       lang: 'pt-BR',
-      name: 'App Cifras Calv√°rio',
-      short_name: 'Cifras Calv√°rio',
+      name: 'App Cifras Calv·rio',
+      short_name: 'Cifras Calv·rio',
       display: 'standalone',
     }
   },

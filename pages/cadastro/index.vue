@@ -25,19 +25,22 @@
             </div>
           </div>
           <div class="list-group list-custom-small icon-0">
-            <a
+            <nuxt-link
               v-for="(item, key) in lista" :key="key"
-              :href="`/cadastro/${item.id}`"
+              :to="`/cadastro/${item.id}`"
             >
-              <i class="fa fa-sign-in-alt color-red-dark"></i>
-              <span>{{ item.titulo }} - <em>{{ item.artista }}</em></span>
-              <i class="fa fa-angle-right"></i>
-            </a>
+              <a href="#" >
+                <i class="fa fa-sign-in-alt color-red-dark"></i>
+                <span>{{ item.titulo }} - <em>{{ item.artista }}</em></span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </nuxt-link>
           </div>
         </div>
       </div>
-      <MusicaForm />
     </div>
+
+    <MusicaForm />
   </div>
 </template>
 <script>

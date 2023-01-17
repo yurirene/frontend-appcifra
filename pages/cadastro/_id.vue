@@ -10,11 +10,12 @@
             </div>
 
             <div class="col">
-              <a href="/cadastro"
-                data-back-button class="btn btn-sm float-end rounded-xl shadow-xl text-uppercase font-800 bg-highlight"
-              >
-                <em class="fas fa-arrow-left ms-1"></em> Voltar
-              </a>
+              <nuxt-link to="/cadastro">
+                <a href="#" class="btn btn-sm float-end rounded-xl shadow-xl text-uppercase font-800 bg-highlight"
+                  >
+                  <em class="fas fa-arrow-left ms-1"></em> Voltar
+                </a>
+              </nuxt-link>
             </div>
           </div>
         </div>
@@ -52,8 +53,8 @@
                     :key="k"
                   >
                     <CirculoIdentificador
-                      :cor="o.cor"
-                      :texto="o.sigla"
+                      :cor="o?.cor"
+                      :texto="o?.sigla"
                     />
                   </span>
                 </div>
@@ -68,8 +69,8 @@
                     :key="k"
                   >
                     <CirculoIdentificador
-                    :cor="p.cor"
-                    :texto="p.sigla"
+                    :cor="p?.cor"
+                    :texto="p?.sigla"
                     />
                   </span>
                 </div>
