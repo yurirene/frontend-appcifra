@@ -57,8 +57,8 @@ export default {
     icon: false,
     manifest: {
       lang: 'pt-BR',
-      name: 'App Cifras Calv�rio',
-      short_name: 'Cifras Calv�rio',
+      name: 'App Cifras Calvário',
+      short_name: 'Cifras Calvário',
       display: 'standalone',
     }
   },
