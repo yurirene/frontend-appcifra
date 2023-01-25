@@ -11,10 +11,10 @@
 
             <div class="col">
               <nuxt-link to="/cadastro">
-                <a href="#" class="btn btn-sm float-end rounded-xl shadow-xl text-uppercase font-800 bg-highlight"
-                  >
+                <button class="btn btn-sm float-end rounded-xl shadow-xl text-uppercase font-800 bg-highlight"
+                >
                   <em class="fas fa-arrow-left ms-1"></em> Voltar
-                </a>
+                </button>
               </nuxt-link>
             </div>
           </div>
@@ -26,29 +26,23 @@
           <div class="row">
             <div class="col-6">
               <h1>Seção</h1>
-              <p><em>Partes da Música</em></p>
-              <div class="row">
-                <div class="col-6">
-                  <select v-model="idNovaSecao" class="form-control">
-                    <option v-for="(p,k) in partesCifra" :key="k" :value="p.id">
-                      {{ p.titulo }}
-                    </option>
-                  </select>
-                </div>
-                <div class="col">
-                  <button class="btn btn-primary rounded-m" @click="novaSecao">
-                    <em class="fas fa-plus"></em>
-                    Seção
-                  </button>
-                </div>
-              </div>
+              <select v-model="idNovaSecao" class="form-control">
+                <option v-for="(p,k) in partesCifra" :key="k" :value="p.id">
+                  {{ p.titulo }}
+                </option>
+              </select>
+
+              <button class="btn mt-3 btn-primary rounded-m" @click="novaSecao">
+                <em class="fas fa-plus"></em>
+                Seção
+              </button>
             </div>
             <div class="col-6 border-left">
               <h1>Ordem</h1>
               <div class="row">
-                <div class="col">
+                <div class="col-6">
                   <span
-                  @click="removerDaOrdem(k)"
+                    @click="removerDaOrdem(k)"
                     v-for="(o,k) in ordemDefinida"
                     :key="k"
                   >
@@ -83,6 +77,15 @@
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="row d-flex items-align-center">
+            <div class="col-md-6">
+              <h1>BPM</h1>
+              <input type="number" v-model="bpm" class="form-control" />
+              <button class="btn mt-3 btn-primary rounded-m" @click="atualizarBpm">
+                <em class="fas fa-save"></em> Salvar
+              </button>
             </div>
           </div>
         </div>
@@ -132,7 +135,8 @@ export default {
       partesCifra: [],
       musica: {},
       ordem: [],
-      partes: []
+      partes: [],
+      bpm: null
     }
   },
   mounted() {
@@ -189,6 +193,7 @@ export default {
       this.$axios.$get('/musicas/' + this.$route.params.id)
       .then((response) => {
         this.musica = response.musica;
+        this.bpm = response.musica.bpm;
         this.ordem = response.ordem;
         this.partes = response.partes.map((item) => {
           return {
@@ -216,7 +221,6 @@ export default {
       })
     },
     novaSecao: function() {
-      let parte = this.partes[0];
       this.$axios.$post('/musicas/nova-secao', {
         parte_id: this.idNovaSecao,
         musica_id: this.musica.id
@@ -249,6 +253,12 @@ export default {
       this.$axios.$post('/musicas/atualizar-ordem', {
         musica_id: this.musica.id,
         ordem: this.ordem
+      });
+    },
+    atualizarBpm: function() {
+      this.$axios.$post('/musicas/atualizar-bpm', {
+        musica_id: this.musica.id,
+        bpm: this.bpm
       });
     }
   }

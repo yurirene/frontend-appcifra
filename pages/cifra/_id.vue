@@ -8,13 +8,19 @@
             <p class="color-highlight font-12 mt-n3 pt-1 mb-2">
               {{ musica?.artista }}
             </p>
+            <Metronomo :batimento="musica.bpm" />
           </div>
-          <div class="col">
-            <a href="#"
-              data-back-button class="btn btn-sm float-end rounded-xl shadow-xl text-uppercase font-800 bg-highlight"
+          <div class="col items-align-center">
+            <button @click="back"
+              class="btn btn-sm float-end rounded-xl shadow-xl text-uppercase font-800 bg-highlight"
             >
               <em class="fas fa-arrow-left ms-1"></em> Voltar
-            </a>
+            </button>
+            <button @click="baixar"
+              class="btn btn-sm float-end rounded-xl shadow-xl text-white text-uppercase font-800 bg-primary"
+              >
+                <em class="fas fa-download ms-1"></em> Baixar
+            </button>
           </div>
         </div>
       </div>
@@ -54,30 +60,49 @@
   </div>
 </template>
 <script>
+import Metronomo from '../../components/Metronomo.vue';
+
 
 export default {
-  data() {
-    return {
-      musica: [],
-      ordem: [],
-      partes: []
-    }
-  },
-  mounted() {
-    this.$loadScript("/assets/scripts/custom.js")
-    .then(()=> {init_template();})
-
-    this.carregarCifra();
-  },
-  methods: {
-    carregarCifra: function() {
-      this.$axios.$get('/cifra/' + this.$route.params.id)
-      .then((response) => {
-        this.ordem = response.ordem;
-        this.partes = response.partes
-        this.musica = response.musica
-      });
-    }
-  }
+    data() {
+        return {
+            musica: [],
+            ordem: [],
+            partes: [],
+        };
+    },
+    mounted() {
+        this.$loadScript("/assets/scripts/custom.js")
+            .then(() => { init_template(); });
+        this.carregarCifra();
+    },
+    methods: {
+      carregarCifra: function () {
+          this.$axios.$get("/cifra/" + this.$route.params.id)
+              .then((response) => {
+                console.log(response.musica);
+              this.ordem = response.ordem;
+              this.partes = response.partes;
+              this.musica = response.musica;
+          });
+      },
+      back: function () {
+          return this.$router.go(-1);
+      },
+      baixar: function () {
+        this.$axios.$get("/baixar/" + this.$route.params.id)
+            .then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", this.musica.titulo + ".txt");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+      },
+    },
+    components: { Metronomo }
 }
 </script>
